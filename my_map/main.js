@@ -15,9 +15,9 @@ const map = new mapboxgl.Map({
 
 map.on("load", () => {
   // LOAD DATA: add vector tileset from DVRPC's server
-  map.addSource("traffic-analysis-zone-tiles", {
+  map.addSource("sidewalk-tiles", {
     type: "vector",
-    url: "https://www.tiles.dvrpc.org/data/taz-2010.json",
+    url: "https://www.tiles.dvrpc.org/data/pedestrian-network.json",
     minzoom: 8,
   });
 
@@ -28,21 +28,11 @@ map.on("load", () => {
   });
 
   // ADD LAYER: add two TAZ layers, one as a "fill" the other as a "line"
-  map.addLayer({
-    id: "taz-fill",
-    type: "fill",
-    source: "traffic-analysis-zone-tiles",
-    "source-layer": "TAZ_2010",
-    paint: {
-      "fill-opacity": 0,
-      "fill-color": "black",
-    },
-  });
 
   map.addLayer({
     id: "taz-outline",
     type: "line",
-    source: "traffic-analysis-zone-tiles",
+    source: "sidewalk-tiles",
     "source-layer": "TAZ_2010",
     paint: {
       "line-width": 0.8,

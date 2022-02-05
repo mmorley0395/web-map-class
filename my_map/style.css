@@ -53,3 +53,21 @@ header .content p {
   font-size: 30px;
   color: rgba(255, 255, 255, 0.2);
 }
+body {
+  background: #1d1f20;
+  padding: 16px;
+  width: 25%;
+  height: 100%;
+}
+
+canvas {
+  border: 1px dotted red;
+}
+
+.chart-container {
+  z-index: 2;
+  position: absolute;
+  margin: auto;
+  width: 25%;
+  height: 100%;
+}

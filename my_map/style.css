@@ -8,3 +8,48 @@ body {
   bottom: 0;
   width: 100%;
 }
+#header {
+  position: absolute;
+  z-index: 1;
+  top: 100% vw;
+  width: 80%;
+  background-color: rgb(1, 1, 1);
+  color: rgb(7, 242, 160);
+  padding: 20px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+#chartbox {
+  position: absolute;
+  z-index: 1;
+  top: 25% vw;
+  width: 25%;
+  height: 100%;
+  background-color: rgba(1, 1, 1, 0.447);
+  color: rgb(206, 252, 244);
+  padding: 20px;
+  font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.bolded {
+  font-weight: bold;
+}
+
+header {
+  width: 100%;
+  padding: 20px 0;
+  color: rgb(255, 255, 255);
+}
+header .content {
+  width: 1000px;
+  margin: auto;
+  color: rgb(255, 255, 255);
+}
+header .content p {
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.2);
+}

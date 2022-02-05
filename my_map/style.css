@@ -55,19 +55,20 @@ header .content p {
 }
 body {
   background: #1d1f20;
-  padding: 16px;
+  padding: 0px;
   width: 25%;
   height: 100%;
 }
 
-canvas {
-  border: 1px dotted red;
-}
+/* canvas {
+  border: 1px dotted rgb(244, 244, 244);
+} */
 
 .chart-container {
   z-index: 2;
   position: absolute;
   margin: auto;
-  width: 25%;
-  height: 100%;
+  width: 90%;
+  height: 80%;
+  bottom: 10px;
 }

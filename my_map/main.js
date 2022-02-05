@@ -106,7 +106,7 @@ map.on("load", () => {
 });
 
 var data = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  labels: ["Mouse", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
   datasets: [
     {
       label: "Dataset #1",

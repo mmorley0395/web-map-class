@@ -10,8 +10,6 @@ const map = new mapboxgl.Map({
   zoom: 9.5,
 });
 
-// Step 2: add data sources and layers to the map after initial load
-// -----------------------------------------------------------------
 var data = {
   labels: ["Mouse", "Pig", "House"],
   datasets: [
@@ -42,13 +40,9 @@ function removeData(chart) {
   });
   chart.update();
 }
-function updateConfigByMutating(chart) {
-  chart.options.plugins.title.text = "new title";
-  chart.update();
-}
-
 map.on("load", () => {
   // LOAD DATA: add vector tileset from DVRPC's server
+
   map.addSource("rtsp_tile", {
     type: "vector",
     url: "https://www.tiles.dvrpc.org/data/rtps-reliability.json",
@@ -82,10 +76,6 @@ map.on("load", () => {
     let properties = e.features[0].properties;
     let otp = properties["otp"];
     let line = properties["linename"];
-    // let boards = properties["Total_Weekday_Boards"];
-    // let alights = properties["Total_Weekday_Leaves"];
-
-    // build a HTML template with the values for this feature
     let message = `
       <ul>
         <h3><span class="bolded">Route ${line}</span> is on time ${otp}% of the time</h3>
@@ -115,7 +105,7 @@ map.on("load", () => {
 
   map.on("click", "rtsp", (e) => {
     console.log(data.labels);
-    removeData(data);
+    removeData(chart);
     console.log(data);
     // let properties = e.features[0].properties;
     // let otp = properties["otp"];

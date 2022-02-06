@@ -71,15 +71,10 @@ map.on("load", () => {
   map.on("mouseenter", "rtsp", (e) => {
     // get the attributes for the specific feature under the mouse
     let properties = e.features[0].properties;
-    let otp = properties["otp"];
     let line = properties["linename"];
     let message = `
-      <ul>
-        <h3><span class="bolded">Route ${line}</span> is on time ${otp}% of the time</h3>
-      </ul>
+<h3>Route ${line}</h3>
     `;
-
-    // create the popup and add it to the map
     let popup = new mapboxgl.Popup({
       closeButton: false,
       className: "popup-style",
@@ -109,6 +104,10 @@ map.on("load", () => {
     addData(chart, line, otp);
     addData(chart, line, 100 - otp);
     chart.update();
+    document.getElementById(
+      "routedesc"
+    ).innerHTML = `Route ${line} is on-time <span style="color: rgba(59, 250, 6, 0.8)">${otp}% <span/> 
+    of the time.`;
   });
 });
 

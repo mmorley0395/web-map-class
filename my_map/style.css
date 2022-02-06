@@ -68,3 +68,17 @@ body {
   height: 80%;
   bottom: 10px;
 }
+#routedesc {
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  width: 80%;
+  height: 70%;
+  bottom: 0px;
+  background-color: rgba(1, 1, 1, 0);
+  color: rgb(201, 201, 201);
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: 100%;
+}

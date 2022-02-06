@@ -13,7 +13,7 @@ const map = new mapboxgl.Map({
 // Step 2: add data sources and layers to the map after initial load
 // -----------------------------------------------------------------
 var data = {
-  labels: ["Mouse"],
+  labels: ["Mouse", "Pig", "House"],
   datasets: [
     {
       label: "Dataset #1",
@@ -22,7 +22,7 @@ var data = {
       borderWidth: 2,
       hoverBackgroundColor: "rgba(255,99,132,0.4)",
       hoverBorderColor: "rgba(255,99,132,1)",
-      data: [1],
+      data: [1, 2, 3],
     },
   ],
 };
@@ -114,11 +114,15 @@ map.on("load", () => {
   });
 
   map.on("click", "rtsp", (e) => {
-    let properties = e.features[0].properties;
-    let otp = properties["otp"];
-    let line = properties["linename"];
-    addData(chart, line, otp);
-    chart.update();
+    console.log(data.labels);
+    removeData(data);
+    console.log(data);
+    // let properties = e.features[0].properties;
+    // let otp = properties["otp"];
+    // let line = properties["linename"];
+    // addData(chart, line, otp);
+    // console.log(data);
+    // chart.update();
   });
 });
 

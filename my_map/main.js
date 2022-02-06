@@ -11,22 +11,20 @@ const map = new mapboxgl.Map({
 });
 
 var data = {
-  labels: ["Mouse", "Pig", "House"],
+  labels: [],
   datasets: [
     {
       label: "Dataset #1",
-      backgroundColor: "rgba(255,99,132,0.2)",
-      borderColor: "rgba(255,99,132,1)",
+      backgroundColor: ["rgba(59, 250, 6, 0.2)", "rgba(255, 99, 132, 0.2)"],
+      borderColor: ["rgba(59, 250, 6, 0.8)", "rgba(255,99,132,.8)"],
       borderWidth: 2,
       hoverBackgroundColor: "rgba(255,99,132,0.4)",
       hoverBorderColor: "rgba(255,99,132,1)",
-      data: [1, 2, 3],
+      data: [],
     },
   ],
 };
-
 function addData(chart, label, data) {
-  chart.data.labels.push(label);
   chart.data.datasets.forEach((dataset) => {
     dataset.data.push(data);
   });
@@ -34,7 +32,6 @@ function addData(chart, label, data) {
 }
 
 function removeData(chart) {
-  chart.data.labels.pop();
   chart.data.datasets.forEach((dataset) => {
     dataset.data.pop();
   });
@@ -104,15 +101,14 @@ map.on("load", () => {
   });
 
   map.on("click", "rtsp", (e) => {
-    console.log(data.labels);
     removeData(chart);
-    console.log(data);
-    // let properties = e.features[0].properties;
-    // let otp = properties["otp"];
-    // let line = properties["linename"];
-    // addData(chart, line, otp);
-    // console.log(data);
-    // chart.update();
+    removeData(chart);
+    let properties = e.features[0].properties;
+    let otp = properties["otp"];
+    let line = properties["linename"];
+    addData(chart, line, otp);
+    addData(chart, line, 100 - otp);
+    chart.update();
   });
 });
 
@@ -135,7 +131,7 @@ var options = {
 };
 
 const chart = new Chart("chart", {
-  type: "pie",
+  type: "doughnut",
   options: options,
   data: data,
 });

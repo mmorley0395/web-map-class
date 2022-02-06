@@ -134,8 +134,8 @@ var options = {
   },
 };
 
-new Chart("chart", {
-  type: "doughnut",
+const chart = new Chart("chart", {
+  type: "pie",
   options: options,
   data: data,
 });

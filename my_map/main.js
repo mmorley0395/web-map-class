@@ -12,6 +12,40 @@ const map = new mapboxgl.Map({
 
 // Step 2: add data sources and layers to the map after initial load
 // -----------------------------------------------------------------
+var data = {
+  labels: ["Mouse"],
+  datasets: [
+    {
+      label: "Dataset #1",
+      backgroundColor: "rgba(255,99,132,0.2)",
+      borderColor: "rgba(255,99,132,1)",
+      borderWidth: 2,
+      hoverBackgroundColor: "rgba(255,99,132,0.4)",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: [1],
+    },
+  ],
+};
+
+function addData(chart, label, data) {
+  chart.data.labels.push(label);
+  chart.data.datasets.forEach((dataset) => {
+    dataset.data.push(data);
+  });
+  chart.update();
+}
+
+function removeData(chart) {
+  chart.data.labels.pop();
+  chart.data.datasets.forEach((dataset) => {
+    dataset.data.pop();
+  });
+  chart.update();
+}
+function updateConfigByMutating(chart) {
+  chart.options.plugins.title.text = "new title";
+  chart.update();
+}
 
 map.on("load", () => {
   // LOAD DATA: add vector tileset from DVRPC's server
@@ -21,19 +55,6 @@ map.on("load", () => {
     minzoom: 8,
   });
 
-  map.addLayer({
-    id: "selected-line-name",
-    type: "line",
-    source: "rtsp_tile",
-    paint: {
-      "line-opacity": 1,
-      "line-width": 50,
-      "line-color": "yellow",
-    },
-    filter: ["==", "linename", "none"],
-  });
-
-  // ADD LAYER: add two TAZ layers, one as a "fill" the other as a "line"
   map.addLayer({
     id: "rtsp",
     type: "line",
@@ -92,33 +113,14 @@ map.on("load", () => {
     }
   });
 
-  // When the user clicks on a RR line, filter the 'selected'
-  // layer to show all features with that specific 'linename'
-  // and also update the floating text box
   map.on("click", "rtsp", (e) => {
-    // filter map layer
-    let clicked_routename = e.features[0].properties["linename"];
-    map.setFilter("selected-line-name", ["==", "linename", clicked_routename]);
-
-    let div = document.getElementById("user-feedback");
-    div.innerText = "This is route " + clicked_routename;
+    let properties = e.features[0].properties;
+    let otp = properties["otp"];
+    let line = properties["linename"];
+    addData(chart, line, otp);
+    chart.update();
   });
 });
-
-var data = {
-  labels: ["Mouse", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-  datasets: [
-    {
-      label: "Dataset #1",
-      backgroundColor: "rgba(255,99,132,0.2)",
-      borderColor: "rgba(255,99,132,1)",
-      borderWidth: 2,
-      hoverBackgroundColor: "rgba(255,99,132,0.4)",
-      hoverBorderColor: "rgba(255,99,132,1)",
-      data: [65, 59, 20, 81, 56, 55, 40],
-    },
-  ],
-};
 
 var options = {
   maintainAspectRatio: false,
@@ -139,7 +141,7 @@ var options = {
 };
 
 new Chart("chart", {
-  type: "pie",
+  type: "doughnut",
   options: options,
   data: data,
 });

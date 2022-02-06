@@ -60,10 +60,6 @@ body {
   height: 100%;
 }
 
-/* canvas {
-  border: 1px dotted rgb(244, 244, 244);
-} */
-
 .chart-container {
   z-index: 2;
   position: absolute;
